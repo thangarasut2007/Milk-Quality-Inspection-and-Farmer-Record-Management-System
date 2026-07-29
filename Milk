@@ -1,0 +1,35 @@
+from abc import ABC, abstractmethod
+
+class Milk(ABC):
+
+    @abstractmethod
+    def registerFarmer(self):
+        pass
+
+    @abstractmethod
+    def collectMilk(self):
+        pass
+
+    @abstractmethod
+    def checkQuality(self, temp, ph, conductivity):
+        pass
+
+    @abstractmethod
+    def calculateAmount(self, litre, quality):
+        pass
+
+    @abstractmethod
+    def checkAmount(self):
+        pass
+
+    @abstractmethod
+    def updateDetails(self):
+        pass
+
+    @abstractmethod
+    def transactionHistory(self):
+        pass
+
+    @abstractmethod
+    def alertNotification(self, quality):
+        pass
