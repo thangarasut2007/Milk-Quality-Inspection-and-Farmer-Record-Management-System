@@ -11,7 +11,7 @@ class Milk(ABC):
         pass
 
     @abstractmethod
-    def checkQuality(self, temp, ph, conductivity):
+    def checkQuality(self, temperature, ph, conductivity):
         pass
 
     @abstractmethod
@@ -23,7 +23,19 @@ class Milk(ABC):
         pass
 
     @abstractmethod
+    def searchFarmer(self):
+        pass
+
+    @abstractmethod
     def updateDetails(self):
+        pass
+
+    @abstractmethod
+    def deleteFarmer(self):
+        pass
+
+    @abstractmethod
+    def viewAllFarmers(self):
         pass
 
     @abstractmethod
@@ -31,5 +43,109 @@ class Milk(ABC):
         pass
 
     @abstractmethod
+    def dailyReport(self):
+        pass
+
+    @abstractmethod
     def alertNotification(self, quality):
         pass
+
+class Farmer:
+
+    def __init__(self, farmer_id, name, mobile):
+
+        # Private Variables
+        self.__farmer_id = farmer_id
+        self.__name = name
+        self.__mobile = mobile
+        self.__milk = 0.0
+        self.__temperature = 0.0
+        self.__ph = 0.0
+        self.__conductivity = 0.0
+        self.__quality = "Not Checked"
+        self.__amount = 0.0
+        self.__date = ""
+        self.__history=[]
+    def get_farmer_id(self):
+        return self.__farmer_id
+
+    def get_name(self):
+        return self.__name
+
+    def get_mobile(self):
+        return self.__mobile
+
+    def get_milk(self):
+        return self.__milk
+
+    def get_temperature(self):
+        return self.__temperature
+
+    def get_ph(self):
+        return self.__ph
+
+    def get_conductivity(self):
+        return self.__conductivity
+
+    def get_quality(self):
+        return self.__quality
+
+    def get_amount(self):
+        return self.__amount
+
+    def get_date(self):
+        return self.__date
+
+    def get_history(self):
+        return self.__history
+
+    def set_name(self, name):
+        self.__name = name
+
+    def set_mobile(self, mobile):
+        self.__mobile = mobile
+
+    def set_milk(self, milk):
+        self.__milk = milk
+
+    def set_temperature(self, temperature):
+        self.__temperature = temperature
+
+    def set_ph(self, ph):
+        self.__ph = ph
+
+    def set_conductivity(self, conductivity):
+        self.__conductivity = conductivity
+
+    def set_quality(self, quality):
+        self.__quality = quality
+
+    def set_amount(self, amount):
+        self.__amount = amount
+
+    def set_date(self):
+        self.__date = datetime.now().strftime("%d-%m-%Y %I:%M:%S %p")
+
+    def add_history(self, message):
+        self.__history.append(message)
+
+class MilkSystem(Milk):
+
+    def __init__(self):
+
+        # List to store all farmers
+        self.farmers = []
+
+    def registerFarmer(self):
+
+        print("\n========== FARMER REGISTRATION ==========")
+
+        farmer_id = input("Enter Farmer ID : ")
+        name = input("Enter Farmer Name : ")
+        mobile = input("Enter Mobile Number : ")
+
+        farmer = Farmer(farmer_id, name, mobile)
+
+        self.farmers.append(farmer)
+
+        print("\nFarmer Registered Successfully.")
