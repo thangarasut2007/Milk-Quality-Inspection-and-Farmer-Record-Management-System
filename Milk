@@ -149,3 +149,60 @@ class MilkSystem(Milk):
         self.farmers.append(farmer)
 
         print("\nFarmer Registered Successfully.")
+
+    def collectMilk(self):
+
+        name = input("\nEnter Farmer Name : ")
+
+        for farmer in self.farmers:
+
+            if farmer.get_name() == name:
+
+                milk = float(input("Enter Milk Quantity (Litre) : "))
+                temperature = float(input("Enter Temperature : "))
+                ph = float(input("Enter pH Value : "))
+                conductivity = float(input("Enter Conductivity : "))
+
+                farmer.set_milk(milk)
+                farmer.set_temperature(temperature)
+                farmer.set_ph(ph)
+                farmer.set_conductivity(conductivity)
+                farmer.set_date()
+
+                quality = self.checkQuality(
+                    temperature,
+                    ph,
+                    conductivity
+                )
+
+                farmer.set_quality(quality)
+
+                amount = self.calculateAmount(
+                    milk,
+                    quality
+                )
+                farmer.set_amount(amount)
+                farmer.add_history(
+                    f"{farmer.get_date()} | {milk} L | {quality} | ₹{amount}"
+                )
+                self.alertNotification(quality)
+                print("\nMilk Collection Completed Successfully.")
+                return
+        print("Farmer Not Found.")
+
+    def checkQuality(self, temperature, ph, conductivity):
+
+        if temperature <= 10 and 6.5 <= ph <= 6.8 and conductivity <= 5:
+            return "GOOD"
+
+        return "SUSPECTED ADULTERATION"
+
+    def calculateAmount(self, litre, quality):
+
+        price = 42
+
+        if quality == "GOOD":
+            return litre * price
+
+        return 0
+
