@@ -206,3 +206,256 @@ class MilkSystem(Milk):
 
         return 0
 
+    # ==========================
+# Check Amount
+# ==========================
+
+def checkAmount(self):
+
+    name = input("Enter Farmer Name : ")
+
+    for farmer in self.farmers:
+
+        if farmer.get_name() == name:
+
+            print("\n========== PAYMENT DETAILS ==========")
+            print("Farmer ID      :", farmer.get_farmer_id())
+            print("Farmer Name    :", farmer.get_name())
+            print("Milk Quantity  :", farmer.get_milk(), "L")
+            print("Quality Status :", farmer.get_quality())
+            print("Amount         : ₹", farmer.get_amount())
+            return
+
+    print("Farmer Not Found")
+
+
+# ==========================
+# Search Farmer
+# ==========================
+
+def searchFarmer(self):
+
+    name = input("Enter Farmer Name : ")
+
+    for farmer in self.farmers:
+
+        if farmer.get_name() == name:
+
+            print("\n========== FARMER DETAILS ==========")
+            print("Farmer ID      :", farmer.get_farmer_id())
+            print("Name           :", farmer.get_name())
+            print("Mobile         :", farmer.get_mobile())
+            print("Milk           :", farmer.get_milk(), "L")
+            print("Temperature    :", farmer.get_temperature())
+            print("pH             :", farmer.get_ph())
+            print("Conductivity   :", farmer.get_conductivity())
+            print("Quality        :", farmer.get_quality())
+            print("Amount         : ₹", farmer.get_amount())
+            print("Date & Time    :", farmer.get_date())
+            return
+
+    print("Farmer Not Found")
+
+
+# ==========================
+# Update Details
+# ==========================
+
+def updateDetails(self):
+
+    name = input("Enter Farmer Name : ")
+
+    for farmer in self.farmers:
+
+        if farmer.get_name() == name:
+
+            print("\n1. Update Name")
+            print("2. Update Mobile")
+
+            choice = int(input("Enter Choice : "))
+
+            if choice == 1:
+
+                new_name = input("Enter New Name : ")
+                farmer.set_name(new_name)
+                farmer.add_history("Farmer Name Updated")
+
+            elif choice == 2:
+
+                new_mobile = input("Enter New Mobile Number : ")
+                farmer.set_mobile(new_mobile)
+                farmer.add_history("Mobile Number Updated")
+
+            else:
+                print("Invalid Choice")
+                return
+
+            print("Details Updated Successfully")
+            return
+
+    print("Farmer Not Found")
+# ==========================
+# Delete Farmer
+# ==========================
+
+def deleteFarmer(self):
+
+    name = input("Enter Farmer Name : ")
+
+    for farmer in self.farmers:
+
+        if farmer.get_name() == name:
+
+            self.farmers.remove(farmer)
+
+            print("Farmer Deleted Successfully")
+            return
+
+    print("Farmer Not Found")
+
+
+# ==========================
+# View All Farmers
+# ==========================
+
+def viewAllFarmers(self):
+
+    if len(self.farmers) == 0:
+
+        print("No Farmers Available")
+        return
+
+    print("\n========== ALL FARMERS ==========")
+
+    for farmer in self.farmers:
+
+        print("--------------------------------------")
+        print("Farmer ID      :", farmer.get_farmer_id())
+        print("Name           :", farmer.get_name())
+        print("Mobile         :", farmer.get_mobile())
+        print("Milk Quantity  :", farmer.get_milk(), "L")
+        print("Quality        :", farmer.get_quality())
+        print("Amount         : ₹", farmer.get_amount())
+
+
+# ==========================
+# Transaction History
+# ==========================
+
+def transactionHistory(self):
+
+    name = input("Enter Farmer Name : ")
+
+    for farmer in self.farmers:
+
+        if farmer.get_name() == name:
+
+            print("\n========== TRANSACTION HISTORY ==========")
+
+            history = farmer.get_history()
+
+            if len(history) == 0:
+                print("No Transactions Found")
+
+            else:
+
+                for i, transaction in enumerate(history, 1):
+
+                    print(i, ".", transaction)
+
+            return
+
+    print("Farmer Not Found")
+
+
+# ==========================
+# Daily Collection Report
+# ==========================
+
+def dailyReport(self):
+
+    total_farmers = len(self.farmers)
+
+    total_milk = 0
+    total_amount = 0
+
+    for farmer in self.farmers:
+
+        total_milk += farmer.get_milk()
+        total_amount += farmer.get_amount()
+
+    print("\n========== DAILY REPORT ==========")
+    print("Total Farmers     :", total_farmers)
+    print("Total Milk        :", total_milk, "L")
+    print("Total Amount      : ₹", total_amount)
+
+
+# ==========================
+# Alert Notification
+# ==========================
+
+def alertNotification(self, quality):
+
+    if quality == "GOOD":
+
+        print("\nMilk Accepted")
+        print("Payment Generated Successfully")
+
+    else:
+
+        print("\n***** ALERT *****")
+        print("Milk Rejected")
+        print("Reason : Poor Quality")
+obj = MilkSystem()
+
+while True:
+
+    print("\n========================================")
+    print(" AI SMART MILK QUALITY SYSTEM ")
+    print("========================================")
+    print("1. Register Farmer")
+    print("2. Collect Milk")
+    print("3. Check Amount")
+    print("4. Search Farmer")
+    print("5. Update Details")
+    print("6. Delete Farmer")
+    print("7. View All Farmers")
+    print("8. Transaction History")
+    print("9. Daily Report")
+    print("10. Exit")
+
+    choice = int(input("Enter Choice : "))
+
+    if choice == 1:
+        obj.registerFarmer()
+
+    elif choice == 2:
+        obj.collectMilk()
+
+    elif choice == 3:
+        obj.checkAmount()
+
+    elif choice == 4:
+        obj.searchFarmer()
+
+    elif choice == 5:
+        obj.updateDetails()
+
+    elif choice == 6:
+        obj.deleteFarmer()
+
+    elif choice == 7:
+        obj.viewAllFarmers()
+
+    elif choice == 8:
+        obj.transactionHistory()
+
+    elif choice == 9:
+        obj.dailyReport()
+
+    elif choice == 10:
+        print("Thank You...")
+        break
+
+    else:
+        print("Invalid Choice")
